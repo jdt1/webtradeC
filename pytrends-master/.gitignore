@@ -1,0 +1,8 @@
+/.idea
+*.pyc
+build/
+dist/
+pytrends.egg-info/
+examples/jhogue_test.py
+examples/pizza.csv
+pytrends/__pycache__/

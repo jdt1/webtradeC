@@ -1,0 +1,419 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebTradeC</name>
+    </assembly>
+    <members>
+        <member name="T:WebTradeC.BackTest">
+            <summary>
+            This class is used for backtesting different strategies.
+            It contains different methods for different strategies.
+            Each strategy returns the remaining value after starting with
+            a initial capital of 1 and a TickList containing the trade
+            dates and trade values.
+            </summary>
+        </member>
+        <member name="M:WebTradeC.BackTest.SimpleHoldStrategy(WebTradeC.TickList,WebTradeC.TickList,System.Boolean,System.Decimal,System.Int32)">
+            <summary>
+            A simple hold strategy.
+            When the value of the web data has (absolutely or relatively), increased
+            by a certain number or percentage, the asset is held for the specified holdtime.
+            </summary>
+            <param name="valuedata">A TickList containing the value data.</param>
+            <param name="webdata">A TickList containing the Google search data.</param>
+            <param name="relative">If true, the change is interpreted as relative change. 
+            Otherwise, the change is absolute.</param>
+            <param name="change">A number representing the change treshold.</param>
+            <param name="holdtime">The time for which to hold the asset in hours. 
+            (this might change into the future when testing high-frequency strategies).</param>
+            <returns>A touple containing: a decimal representing the remaing value
+            after using this strategy. A TickList containing the buy- and -sell 
+            values and prices.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:WebTradeC.BackTest.SimpleHoldStrategyResult(WebTradeC.TickList,WebTradeC.TickList,System.Boolean,System.Decimal,System.Int32)" -->
+        <member name="T:WebTradeC.GoogleTrends">
+            <summary>
+            This class contains methods to downloads data from Google Trends 
+            and create a TickList from it. 
+            </summary>
+        </member>
+        <member name="T:WebTradeC.WebProvider">
+            <summary>
+            This class represents a Web Stream provider that can
+            be queried for Stream data.
+            It searches the downloaded JSON file for a date and 
+            a property following that date.
+            </summary>
+        </member>
+        <member name="M:WebTradeC.GoogleTrends.#ctor">
+            <summary>
+            Constructor of the class. Instantiates a Google Trends downloading-
+            and parsing class.
+            </summary>
+        </member>
+        <member name="T:WebTradeC.LiveTickList">
+            <summary>
+            This class represents a TickList that can be updated regularly.
+            </summary>
+        </member>
+        <member name="T:WebTradeC.TickList">
+            <summary>
+            This class represents a list of ticks.
+            It contains methods to read from CSV files and
+            calculate absolute and relative differences.
+            </summary>
+        </member>
+        <member name="M:WebTradeC.TickList.#ctor">
+            <summary>
+            Empty constructor of the class
+            </summary>
+        </member>
+        <member name="M:WebTradeC.TickList.#ctor(System.String)">
+            <summary>
+            Constructor of the class
+            </summary>
+            <param name="filename">Path to a CSV-file to be parsed</param>
+        </member>
+        <member name="M:WebTradeC.TickList.#ctor(System.String,System.String)">
+            <summary>
+            Constructor of the class
+            </summary>
+            <param name="filename">Path to a CSV-file to be parsed</param>
+            <param name="name">Name of the new TickList</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:WebTradeC.TickList.getList" -->
+        <member name="M:WebTradeC.TickList.readCSV(System.String)">
+            <summary>
+            Read tick information from a ;-seperated CSV file with no header.
+            Date information should be formatted as dd-mm-yyyy, tick
+            information a number with decimal point.
+            </summary>
+            <param name="filename">path and filename of the CSV file to be read</param>
+        </member>
+        <member name="M:WebTradeC.TickList.valueAt(System.DateTime)">
+            <summary>
+            Finds the value at the specified DateTime, if it exists.
+            </summary>
+            <param name="time"></param>
+            <returns>The value corresponding to the given time.</returns>
+        </member>
+        <member name="M:WebTradeC.TickList.Add(WebTradeC.Tick)">
+            <summary>
+            Add a Tick to the list
+            </summary>
+            <param name="t">Tick to be added</param>
+        </member>
+        <member name="M:WebTradeC.TickList.AbsoluteDifferences">
+            <summary>
+            Calculate the absolute differences between each successive tick.
+            Each date is the date at which the difference has been observed,
+            so the b in "a - b".
+            </summary>
+            <returns>A TickList containing the dates at which the differences
+            have been observed, and the differences.</returns>
+        </member>
+        <member name="M:WebTradeC.TickList.RelativeDifferences">
+            <summary>
+            Calculate the relative differences between each successive tick.
+            This means each absolute difference is scaled by the original value.
+            For example from 10 to 8 the absolute difference is -2, the relative
+            difference is -2/10 = 0.2.
+            </summary>
+            <returns>A TickList containing the dates at which the differences
+            have been observed, and the differences.</returns>
+        </member>
+        <member name="M:WebTradeC.TickList.toString">
+            <summary>
+            A string representation of the complete list.
+            </summary>
+            <returns>A string representation of the TickList, 
+            each line seperated by a newline.</returns>
+        </member>
+        <member name="M:WebTradeC.TickList.findDate(System.DateTime)">
+            <summary>
+            Performs a binary search to find a Tick with the specified 
+            date and returns the zero-based index of the first found Tick
+            in the TickList.
+            </summary>
+            <param name="tofind">A DateTime object specifying
+            the Date to search for.</param>
+            <returns>The zero-based index of the position of the
+            first Tick with the same date.</returns>
+        </member>
+        <member name="M:WebTradeC.TickList.lastDate">
+            <summary>
+            Returns the DateTime object of the last Tick in the 
+            TickList
+            </summary>
+        </member>
+        <member name="M:WebTradeC.LoadStreamDialog.btnAdd_Click(System.Object,System.EventArgs)">
+            <summary>
+            When the Add button is pressed, the input is processed.
+            After that, the screen is closed so the Main class can
+            process the input.
+            </summary>
+        </member>
+        <member name="M:WebTradeC.LoadStreamDialog.radFile_CheckedChanged(System.Object,System.EventArgs)">
+            <summary>
+            Used to enable/disable the file select controls
+            </summary>        
+        </member>
+        <member name="M:WebTradeC.LoadStreamDialog.radWeb_CheckedChanged(System.Object,System.EventArgs)">
+            <summary>
+            Used to enable/disable the webdata select controls
+            </summary>    
+        </member>
+        <member name="M:WebTradeC.LoadStreamDialog.checkRadioButtons">
+            <summary>
+            Call this to update the enabling/disabling of the file-
+            and webdata select controls
+            </summary>
+        </member>
+        <member name="M:WebTradeC.LoadStreamDialog.btnCancel_Click(System.Object,System.EventArgs)">
+            <summary>
+            Close the dialog without loading any new stream
+            </summary>
+        </member>
+        <member name="M:WebTradeC.LoadStreamDialog.btnBrowseFile_Click(System.Object,System.EventArgs)">
+            <summary>
+            Browse for a file containing tick information. After a file is
+            selected, a new TickList will be created and the data will be
+            visible in the preview chart.
+            </summary>
+        </member>
+        <member name="M:WebTradeC.LoadStreamDialog.showInPreviewChart(WebTradeC.TickList,System.String,System.Windows.Forms.DataVisualization.Charting.Chart)">
+            <summary>
+            Add some data to the chart for previewing.
+            </summary>
+            <param name="ticklist">A TickList containing the values to be added.
+            </param>
+        </member>
+        <member name="M:WebTradeC.LoadStreamDialog.showInPreviewChart(WebTradeC.TickList,System.String)">
+            <summary>
+            Add some data to the chart for previewing.
+            </summary>
+            <param name="ticklist">A TickList containing the values to be added.
+            </param>
+        </member>
+        <member name="F:WebTradeC.LoadStreamDialog.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:WebTradeC.LoadStreamDialog.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:WebTradeC.LoadStreamDialog.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:WebTradeC.Logger.Log(System.String)">
+            <summary>
+            Writes an event to the console and the log file.
+            </summary>
+            <param name="text">Text explaining the event.</param>
+        </member>
+        <member name="M:WebTradeC.Main.button1_Click(System.Object,System.EventArgs)">
+            <summary>
+            This button is only here for testing purposes
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:WebTradeC.Main.Main_Load(System.Object,System.EventArgs)">
+            <summary>
+            Test the selected pre-made strategy
+            </summary>
+        </member>
+        <member name="M:WebTradeC.Main.btnClearStrategy_Click(System.Object,System.EventArgs)">
+            <summary>
+            Clear all strategies from the chart
+            </summary>
+        </member>
+        <member name="M:WebTradeC.Main.btnClearAll_Click(System.Object,System.EventArgs)">
+            <summary>
+            Clear all loaded data
+            </summary>
+        </member>
+        <member name="M:WebTradeC.Main.addToChart(WebTradeC.TickList,System.String,System.Boolean,System.Windows.Forms.DataVisualization.Charting.Chart)">
+            <summary>
+            Add some data to the chart.
+            </summary>
+            <param name="ticklist">A TickList containing the values to be added.</param>
+            <param name="legend">The string to be displayed in the legend.</param>
+            <param name="piecewise">If true, every two other points will be connected, the 
+            points in between will be left unconnected: 0---1   2---3  etc.</param>
+        </member>
+        <member name="M:WebTradeC.Main.removeFromChart(System.String,System.Windows.Forms.DataVisualization.Charting.Chart)">
+            <summary>
+            Remove the series with the specified name from the specified chart.
+            </summary>
+        </member>
+        <member name="M:WebTradeC.Main.btnOptimize_Click(System.Object,System.EventArgs)">
+            <summary>
+            Open the Optimize form.
+            </summary>
+        </member>
+        <member name="M:WebTradeC.Main.btnLoadTickLists_Click(System.Object,System.EventArgs)">
+            <summary>
+            Load all the datastreams from the JSON formatted file.
+            </summary>       
+        </member>
+        <member name="M:WebTradeC.Main.btnSaveData_Click(System.Object,System.EventArgs)">
+            <summary>
+            Save the TickListHolder to a JSON formatted textfile
+            </summary>
+        </member>
+        <member name="M:WebTradeC.Main.btnOpenTextFile_Click(System.Object,System.EventArgs)">
+            <summary>
+            Load a data stream from a CSV formatted text file
+            </summary>
+        </member>
+        <member name="M:WebTradeC.Main.addStreamFromFile(System.String)">
+            <summary>
+            Loads a stream from a CSV-formatted textfile
+            </summary>
+            <param name="path">The path to the file that should be loaded</param>
+        </member>
+        <member name="M:WebTradeC.Main.refreshGridView">
+            <summary>
+            Call to update the datagridview
+            </summary>
+        </member>
+        <member name="M:WebTradeC.Main.btnAddStream_Click(System.Object,System.EventArgs)">
+            <summary>
+            Opens a LoadStreamDialog. After the dialog is closed, if a new TickList
+            has been created by the LoadStreamDialog, it will be added to
+            the TickListHolder. After that, the datagridview will be refreshed.
+            </summary>        
+        </member>
+        <member name="M:WebTradeC.Main.btnDeleteStream_Click(System.Object,System.EventArgs)">
+            <summary>
+            Deletes the selected row(s) from the ticklistholder
+            </summary>       
+        </member>
+        <member name="F:WebTradeC.Main.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:WebTradeC.Main.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:WebTradeC.Main.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:WebTradeC.Optimize.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:WebTradeC.Optimize.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:WebTradeC.Optimize.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:WebTradeC.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:WebTradeC.SimpleStrategy">
+            <summary>
+            Represents a simple strategy in which a relative change in the 
+            cause stream triggers a buy or sell in the effect stream. 
+            </summary>
+        </member>
+        <member name="M:WebTradeC.Tick.#ctor(System.DateTime,System.Decimal)">
+            <summary>
+            constructor of the class
+            </summary>
+            <param name="date">The date for the Tick.</param>
+            <param name="value">The value of the Tick.</param>
+        </member>
+        <member name="M:WebTradeC.Tick.getDate">
+            <summary>
+            Returns the Date of the Tick
+            </summary>
+            <returns>A DateTime object specifying the Date of the Tick</returns>
+        </member>
+        <member name="M:WebTradeC.Tick.getValue">
+            <summary>
+            Returns the value of the Tick.
+            </summary>
+            <returns>the value of the Tick</returns>
+        </member>
+        <member name="M:WebTradeC.Tick.ToString">
+            <summary>
+            Returns a String representation of the Tick in the following form:
+            "Date: 23-11-1973, value: 100"
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebTradeC.Tick.CompareTo(WebTradeC.Tick)">
+            <summary>
+            Compare the Tick to another Tick by Date
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WebTradeC.TickListHolder">
+            <summary>
+            This is a class to hold multiple TickLists. It should be opened at 
+            the beginning of a session and closed at the end. It contains
+            methods to write to and from a JSON formatted textfile.
+            </summary>
+        </member>
+        <member name="M:WebTradeC.TickListHolder.WriteToFile(System.String)">
+            <summary>
+            Writes the TickListHolder to a JSON formatted textfile.
+            If a file the the specified filename already exists, it will
+            be overwritten.
+            </summary>
+            <param name="path">Path and filename of the file
+            that should be written to</param>
+        </member>
+        <member name="M:WebTradeC.TickListHolder.ReadJSON(System.String)">
+            <summary>
+            Reads a TickListHolder from the specified file.
+            </summary>
+            <param name="path">Path and filename to the file
+            that should be read</param>
+            <returns></returns>
+        </member>
+        <member name="T:WebTradeC.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:WebTradeC.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:WebTradeC.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,12 @@
+/media/jim/Backups/Cloud/Engineering/Software/WebTradeC/WebTradeC/obj/Debug/.NETFramework,Version=v4.6.AssemblyAttribute.cs
+/media/jim/Backups/Cloud/Engineering/Software/WebTradeC/WebTradeC/obj/Debug/WebTradeC.LoadStreamDialog.resources
+/media/jim/Backups/Cloud/Engineering/Software/WebTradeC/WebTradeC/obj/Debug/WebTradeC.Main.resources
+/media/jim/Backups/Cloud/Engineering/Software/WebTradeC/WebTradeC/obj/Debug/WebTradeC.Optimize.resources
+/media/jim/Backups/Cloud/Engineering/Software/WebTradeC/WebTradeC/obj/Debug/WebTradeC.Properties.Resources.resources
+/media/jim/Backups/Cloud/Engineering/Software/WebTradeC/WebTradeC/obj/Debug/WebTradeC.exe
+/media/jim/Backups/Cloud/Engineering/Software/WebTradeC/WebTradeC/obj/Debug/WebTradeC.pdb
+/media/jim/Backups/Cloud/Engineering/Software/WebTradeC/WebTradeC/bin/Debug/FileHelpers.dll
+/media/jim/Backups/Cloud/Engineering/Software/WebTradeC/WebTradeC/bin/Debug/netchartdir_cp.dll
+/media/jim/Backups/Cloud/Engineering/Software/WebTradeC/WebTradeC/bin/Debug/Newtonsoft.Json.dll
+/media/jim/Backups/Cloud/Engineering/Software/WebTradeC/WebTradeC/bin/Debug/WebDriver.dll
+/media/jim/Backups/Cloud/Engineering/Software/WebTradeC/WebTradeC/bin/Debug/WebDriver.Support.dll
